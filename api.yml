@@ -1,0 +1,17 @@
+version: 1.0
+configuration:
+  has_webserver: true
+  readonly_paths:
+    - ProjectService.Tests/IntegrationTests.cs
+  scoring:
+    command: rm -rf reports && dotnet build && dotnet test --logger xunit --results-directory ./reports/
+    files: [reports/TestResults.xml]
+  ide_config:
+    default_open_files:
+      - ProjectService.WebAPI/Controllers/ProjectsController.cs
+      - ProjectService.WebAPI/Controllers/UsersController.cs
+      - ProjectService.WebAPI/Startup.cs
+    project_menu:
+      run: dotnet build && dotnet run --project ProjectService.WebAPI
+      install: dotnet build
+      test: rm -rf reports && dotnet build && dotnet test --logger xunit --results-directory ./reports/
